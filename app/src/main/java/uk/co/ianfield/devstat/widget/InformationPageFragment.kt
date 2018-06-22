@@ -26,14 +26,14 @@ class InformationPageFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(activity)
         recyclerView.layoutManager = layoutManager
 
-        val adapter = StatItemAdapter(activity, items) { position: Int ->
-            val clipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val adapter = StatItemAdapter(context!!, items) { position: Int ->
+            val clipboard = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("text label", items[position].toString())
             clipboard.primaryClip = clip
             Snackbar.make(recyclerView, R.string.copied_to_clipboard, Snackbar.LENGTH_SHORT).show()
